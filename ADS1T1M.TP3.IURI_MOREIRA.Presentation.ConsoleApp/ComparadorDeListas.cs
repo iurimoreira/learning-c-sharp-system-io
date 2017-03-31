@@ -24,13 +24,13 @@ namespace ADS1T1M.TP3.IURI_MOREIRA.Presentation.ConsoleApp
                 {
                     Console.WriteLine("O aluno " + aluno.nome + " permanece " + ((aluno.ativo) ? "ativo\n" : "inativo\n"));
 
-                    LogAplicacao.adicionarLogSemAlteracao(aluno, dataLog);
+                    LogAplicacao.alunoSemAlteracao(aluno, dataLog);
                 }
                 else if (alunosOriginais.Any(a => a.matricula == aluno.matricula && a.ativo != aluno.ativo))
                 {
                     Console.WriteLine("O aluno " + aluno.nome + " mudou o seu estado. Agora ele se encontra " + ((aluno.ativo) ? "ativo\n" : "inativo\n"));
 
-                    LogAplicacao.adicionarLogComAlteracao(aluno, dataLog);
+                    LogAplicacao.alunoComAlteracao(aluno, dataLog);
                 }
                 else
                 {
@@ -38,11 +38,11 @@ namespace ADS1T1M.TP3.IURI_MOREIRA.Presentation.ConsoleApp
 
                     Console.WriteLine(aluno.nome + " adicionado na lista.\n");
 
-                    LogAplicacao.adicionarLogNovoAluno(aluno, dataLog);
+                    LogAplicacao.adicionarNovoAluno(aluno, dataLog);
                 }
             }
 
-            baseDeDados.alterarNome(dataLog);
+            baseDeDados.alterarNomeXml(dataLog);
 
             Console.ReadKey();
         }

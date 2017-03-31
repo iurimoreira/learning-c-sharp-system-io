@@ -15,7 +15,7 @@
 
         <Label x:Name="label" Content="Matrícula" HorizontalAlignment="Left" Margin="37,39,0,0" VerticalAlignment="Top" FontSize="18" Height="34" Width="84" Foreground="White"/>
         <TextBox x:Name="matriculaCaixaDeTexto" TextChanged="matricula_TextChanged" HorizontalAlignment="Left" Height="50" Margin="150,30,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="340" FontSize="18" Padding="10,10,0,10"/>
-        <Button x:Name="btnBuscarMatricula" Content="Buscar" Click="buscarMatricula" HorizontalAlignment="Left" Margin="509,30,0,0" VerticalAlignment="Top" Width="138" Height="50" FontSize="20" Grid.ColumnSpan="2" Background="#FF3ADA21" Foreground="White" Padding="1,0,1,1" BorderBrush="#FF333333"/>
+        <Button x:Name="btnBuscarMatricula" Content="BUSCAR" Click="buscarMatricula" HorizontalAlignment="Left" Margin="509,30,0,0" VerticalAlignment="Top" Width="138" Height="50" FontSize="20" Grid.ColumnSpan="2" Background="#FF3ADA21" Foreground="White" Padding="1,0,1,1" BorderBrush="#FF333333"/>
         <Label x:Name="label1" Content="Nome" HorizontalAlignment="Left" Margin="37,150,0,0" VerticalAlignment="Top" FontSize="18" Height="50" Width="59" Padding="5,12,5,5"/>
         <Label x:Name="label2" Content="Matrícula" HorizontalAlignment="Left" Margin="37,230,0,0" VerticalAlignment="Top" FontSize="18" Height="50" Width="84" Padding="5,12,5,5"/>
         <Label x:Name="label3" Content="Data de nascimento" HorizontalAlignment="Left" Margin="37,311,0,0" VerticalAlignment="Top" FontSize="18" Height="50" Width="168" Padding="5,12,5,5"/>

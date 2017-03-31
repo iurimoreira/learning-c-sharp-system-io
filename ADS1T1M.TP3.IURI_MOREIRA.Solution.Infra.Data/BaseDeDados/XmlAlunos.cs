@@ -27,6 +27,36 @@ namespace ADS1T1M.TP3.IURI_MOREIRA.Solution.Infra.Data.BaseDeDados
             return null;
         }
 
+        public void adicionarAluno(Aluno aluno)
+        {
+            XElement elementoXml = new XElement("aluno");
+
+            elementoXml.Add(new XElement("matricula", aluno.matricula));
+            elementoXml.Add(new XElement("nome", aluno.nome));
+            elementoXml.Add(new XElement("datadenascimento", aluno.dataNascimento.ToString("dd/MM/yyyy")));
+            elementoXml.Add(new XElement("cpf", aluno.cpf));
+            elementoXml.Add(new XElement("ativo", (aluno.ativo) ? "1" : "0"));
+
+            XElement xml = XElement.Load(enderecoXmlOriginal);
+            xml.Add(elementoXml);
+            xml.Save(enderecoXmlOriginal);
+        }
+
+        public Aluno retornarAluno(string matricula)
+        {
+            List<Aluno> todosAlunos = retornarTodosAlunos(enderecoXmlOriginal);
+
+            foreach (Aluno aluno in todosAlunos)
+            {
+                if (aluno.matricula == matricula)
+                {
+                    return aluno;
+                }
+            }
+
+            return null;
+        }
+
         public List<Aluno> retornarTodosAlunos(string caminhoDoXml)
         {
             XmlDocument xmlDoc = new XmlDocument();
@@ -59,40 +89,11 @@ namespace ADS1T1M.TP3.IURI_MOREIRA.Solution.Infra.Data.BaseDeDados
             return alunos;
         }
 
-        public void alterarNome(string dataLog)
+        public void alterarNomeXml(string dataLog)
         {
             string novoNomeXml = @"..\..\..\Data\exporte-alunos" + "-" + dataLog + ".xml";
             File.Move(enderecoXmlNovosAlunos, novoNomeXml);
         }
-
-        public void adicionarAluno(Aluno aluno)
-        {
-            XElement elementoXml = new XElement("aluno");
-
-            elementoXml.Add(new XElement("matricula", aluno.matricula));
-            elementoXml.Add(new XElement("nome", aluno.nome));
-            elementoXml.Add(new XElement("datadenascimento", aluno.dataNascimento.ToString("dd/MM/yyyy")));
-            elementoXml.Add(new XElement("cpf", aluno.cpf));
-            elementoXml.Add(new XElement("ativo", (aluno.ativo) ? "1" : "0"));
-
-            XElement xml = XElement.Load(enderecoXmlOriginal);
-            xml.Add(elementoXml);
-            xml.Save(enderecoXmlOriginal);
-        }
-
-        public Aluno retornarAlunoPorMatricula(string matricula)
-        {
-            List<Aluno> todosAlunos = retornarTodosAlunos(enderecoXmlOriginal);
-
-            foreach (Aluno aluno in todosAlunos)
-            {
-                if (aluno.matricula == matricula)
-                {
-                    return aluno;
-                }
-            }
-
-            return null;
-        }
+  
     }
 }

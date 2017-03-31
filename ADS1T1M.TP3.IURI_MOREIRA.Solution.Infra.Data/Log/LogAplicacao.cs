@@ -13,17 +13,17 @@ namespace ADS1T1M.TP3.IURI_MOREIRA.Solution.Infra.Data.Log
             get { return enderecoArquivoLog; }
         }
 
-        public static void adicionarLogSemAlteracao(Aluno aluno,string dataLog)
+        public static void alunoSemAlteracao(Aluno aluno,string dataLog)
         {
             File.AppendAllText(enderecoArquivoLog + dataLog + ".txt", "matricula > " + aluno.matricula + ";" + " nome > " + aluno.nome + "; ativo > " + ((aluno.ativo) ? "1" : "0") + "; OK" + Environment.NewLine);
         }
 
-        public static void adicionarLogComAlteracao(Aluno aluno, string dataLog)
+        public static void alunoComAlteracao(Aluno aluno, string dataLog)
         {
             File.AppendAllText(enderecoArquivoLog + dataLog + ".txt", "matricula > " + aluno.matricula + ";" + " nome > " + aluno.nome + "; alterado : ativo > " + ((aluno.ativo) ? "1" : "0") + Environment.NewLine);
         }
 
-        public static void adicionarLogNovoAluno(Aluno aluno, string dataLog)
+        public static void adicionarNovoAluno(Aluno aluno, string dataLog)
         {
             File.AppendAllText(enderecoArquivoLog + dataLog + ".txt", "matricula > " + aluno.matricula + ";" + " nome > " + aluno.nome + "; ativo > " + ((aluno.ativo) ? "1" : "0") + " Adicionado" + Environment.NewLine);
         }

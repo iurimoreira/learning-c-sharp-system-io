@@ -1,7 +1,6 @@
 ﻿using ADS1T1M.TP3.IURI_MOREIRA.Solution.Domain.Entities;
 using ADS1T1M.TP3.IURI_MOREIRA.Solution.Infra.Data.BaseDeDados;
 using System.Collections.Generic;
-using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
@@ -24,30 +23,24 @@ namespace ADS1T1M.TP3.IURI_MOREIRA.Presentation.WPFApp
 
             XmlAlunos baseDeDados = new XmlAlunos();
 
-            List<Aluno> alunos = baseDeDados.retornarTodosAlunos(baseDeDados.XmlOriginal);
-
-            Aluno aluno = null;
+            Aluno aluno = baseDeDados.retornarAluno(matricula);
          
-            bool? situacaoAluno = Aluno.validarSituacaoAluno(matricula, alunos);
-
-            if (!situacaoAluno.HasValue)
+            if (aluno==null)
             {
                 statusTexto.Text = "Aluno não encontrado";
                 mudarCorStatusTexto("inexistente");
             }
-            else if (situacaoAluno == false)
+            else if (aluno.ativo)
             {
-                statusTexto.Text = "Aluno suspenso";
-                aluno = baseDeDados.retornarAlunoPorMatricula(matricula);
+                statusTexto.Text = "Aluno liberado";
                 exibirInformacoesAluno(aluno);
-                mudarCorStatusTexto("suspenso");
+                mudarCorStatusTexto("liberado"); 
             }
             else
             {
-                statusTexto.Text = "Aluno liberado";
-                aluno = baseDeDados.retornarAlunoPorMatricula(matricula);
+                statusTexto.Text = "Aluno suspenso";
                 exibirInformacoesAluno(aluno);
-                mudarCorStatusTexto("liberado");
+                mudarCorStatusTexto("suspenso");
             }    
         }
 

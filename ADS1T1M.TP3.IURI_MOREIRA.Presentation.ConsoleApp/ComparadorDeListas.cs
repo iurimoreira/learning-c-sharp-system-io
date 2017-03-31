@@ -1,5 +1,5 @@
 ﻿using ADS1T1M.TP3.IURI_MOREIRA.Solution.Domain.Entities;
-using ADS1T1M.TP3.IURI_MOREIRA.Solution.Infra.Data.BaseDeDados;
+using ADS1T1M.TP3.IURI_MOREIRA.Solution.Infra.Data.Repository;
 using ADS1T1M.TP3.IURI_MOREIRA.Solution.Infra.Data.Log;
 using System;
 using System.Collections.Generic;
@@ -9,9 +9,9 @@ namespace ADS1T1M.TP3.IURI_MOREIRA.Presentation.ConsoleApp
 {
     class ComparadorDeListas
     {
-        public void compararListaDeAlunos()
+        public void compararListasDeAlunos()
         {
-            XmlAlunos baseDeDados = new XmlAlunos();
+            AcessoDadosXml baseDeDados = new AcessoDadosXml();
 
             List<Aluno> alunosOriginais = baseDeDados.retornarTodosAlunos(baseDeDados.XmlOriginal);
             List<Aluno> alunosNovos = baseDeDados.retornarTodosAlunos(baseDeDados.XmlNovosAlunos);

@@ -1,6 +1,5 @@
 ﻿using ADS1T1M.TP3.IURI_MOREIRA.Solution.Domain.Entities;
-using ADS1T1M.TP3.IURI_MOREIRA.Solution.Infra.Data.BaseDeDados;
-using System.Collections.Generic;
+using ADS1T1M.TP3.IURI_MOREIRA.Solution.Infra.Data.Repository;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
@@ -17,31 +16,39 @@ namespace ADS1T1M.TP3.IURI_MOREIRA.Presentation.WPFApp
             InitializeComponent();
         }
 
-        private void buscarMatricula(object sender, RoutedEventArgs e)
+        private void buscarAlunoPorMatricula(object sender, RoutedEventArgs e)
         {
             string matricula = matriculaCaixaDeTexto.Text;
 
-            XmlAlunos baseDeDados = new XmlAlunos();
+            AcessoDadosXml baseDeDados = new AcessoDadosXml();
 
             Aluno aluno = baseDeDados.retornarAluno(matricula);
-         
-            if (aluno==null)
+
+            if (aluno == null)
             {
                 statusTexto.Text = "Aluno não encontrado";
                 mudarCorStatusTexto("inexistente");
             }
-            else if (aluno.ativo)
+            else
+            {
+                validarStatusAluno(aluno);
+            }
+        }
+
+        private void validarStatusAluno(Aluno aluno)
+        {
+            if (aluno.ativo)
             {
                 statusTexto.Text = "Aluno liberado";
                 exibirInformacoesAluno(aluno);
-                mudarCorStatusTexto("liberado"); 
+                mudarCorStatusTexto("liberado");
             }
             else
             {
                 statusTexto.Text = "Aluno suspenso";
                 exibirInformacoesAluno(aluno);
                 mudarCorStatusTexto("suspenso");
-            }    
+            }
         }
 
         private void exibirInformacoesAluno(Aluno aluno)

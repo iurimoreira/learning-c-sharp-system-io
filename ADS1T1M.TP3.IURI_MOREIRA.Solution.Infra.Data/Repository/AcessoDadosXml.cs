@@ -5,9 +5,9 @@ using System.IO;
 using System.Xml;
 using System.Xml.Linq;
 
-namespace ADS1T1M.TP3.IURI_MOREIRA.Solution.Infra.Data.BaseDeDados
+namespace ADS1T1M.TP3.IURI_MOREIRA.Solution.Infra.Data.Repository
 {
-    public class XmlAlunos : IAcessoDados
+    public class AcessoDadosXml : IAcessoDados
     {
         private string enderecoXmlOriginal = @"..\..\..\XML-Original\exporte-alunos-01.xml";
         private string enderecoXmlNovosAlunos = @"..\..\..\Data\exporte-alunos.xml";
@@ -22,9 +22,36 @@ namespace ADS1T1M.TP3.IURI_MOREIRA.Solution.Infra.Data.BaseDeDados
             get { return enderecoXmlNovosAlunos; }
         }
 
-        public List<Aluno> retornarTodosAlunos()
+        public List<Aluno> retornarTodosAlunos(string caminhoDoArquivo)
         {
-            return null;
+            XmlDocument xmlDoc = new XmlDocument();
+
+            xmlDoc.Load(@caminhoDoArquivo);
+
+            XmlNodeList xnList = xmlDoc.GetElementsByTagName("aluno");
+
+            Aluno aluno = null;
+            var alunos = new List<Aluno>();
+
+            foreach (XmlNode xn in xnList)
+            {
+                aluno = new Aluno();
+                aluno.matricula = xn["matricula"].InnerText;
+                aluno.nome = xn["nome"].InnerText;
+
+                string dataNascimentoString = xn["datadenascimento"].InnerText;
+                DateTime dataNascimento = Convert.ToDateTime(dataNascimentoString);
+                aluno.dataNascimento = dataNascimento;
+
+                aluno.cpf = xn["cpf"].InnerText;
+
+                string ativoString = xn["ativo"].InnerText;
+                aluno.ativo = (ativoString == "1") ? true : false;
+
+                alunos.Add(aluno);
+            }
+
+            return alunos;
         }
 
         public void adicionarAluno(Aluno aluno)
@@ -57,43 +84,10 @@ namespace ADS1T1M.TP3.IURI_MOREIRA.Solution.Infra.Data.BaseDeDados
             return null;
         }
 
-        public List<Aluno> retornarTodosAlunos(string caminhoDoXml)
-        {
-            XmlDocument xmlDoc = new XmlDocument();
-
-            xmlDoc.Load(@caminhoDoXml);
-
-            XmlNodeList xnList = xmlDoc.GetElementsByTagName("aluno");
-
-            Aluno aluno = null;
-            var alunos = new List<Aluno>();
-
-            foreach (XmlNode xn in xnList)
-            {
-                aluno = new Aluno();
-                aluno.matricula = xn["matricula"].InnerText;
-                aluno.nome = xn["nome"].InnerText;
-
-                string dataNascimentoString = xn["datadenascimento"].InnerText;
-                DateTime dataNascimento = Convert.ToDateTime(dataNascimentoString);
-                aluno.dataNascimento = dataNascimento;
-
-                aluno.cpf = xn["cpf"].InnerText;
-
-                string ativoString = xn["ativo"].InnerText;
-                aluno.ativo = (ativoString == "1") ? true : false;
-
-                alunos.Add(aluno);
-
-            }
-            return alunos;
-        }
-
         public void alterarNomeXml(string dataLog)
         {
             string novoNomeXml = @"..\..\..\Data\exporte-alunos" + "-" + dataLog + ".xml";
             File.Move(enderecoXmlNovosAlunos, novoNomeXml);
         }
-  
     }
 }

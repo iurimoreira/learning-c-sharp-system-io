@@ -6,7 +6,7 @@
         {
             ComparadorDeListas aplicacao = new ComparadorDeListas();
 
-            aplicacao.compararListaDeAlunos();
+            aplicacao.compararListasDeAlunos();
         }   
     }
 }

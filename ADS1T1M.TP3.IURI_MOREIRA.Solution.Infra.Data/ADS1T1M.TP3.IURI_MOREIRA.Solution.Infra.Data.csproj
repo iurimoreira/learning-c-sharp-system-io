@@ -49,11 +49,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="BaseDeDados\IAcessoDados.cs" />
+    <Compile Include="Repository\IAcessoDados.cs" />
     <Compile Include="Contexts\EntityContextDb.cs" />
     <Compile Include="Log\LogAplicacao.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="BaseDeDados\XmlAlunos.cs" />
+    <Compile Include="Repository\AcessoDadosXml.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
